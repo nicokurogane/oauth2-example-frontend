@@ -1,15 +1,30 @@
-const ACCESS_TOKEN_KEY = "refresh_token";
+const ACCESS_TOKEN_KEY = "access_token";
+const TOKEN_TYPE_KEY = "token_type";
 
-const saveAccessToken = (arrayTaskToAdd) => {
+export const saveAccessToken = (arrayTaskToAdd) => {
   localStorage.setItem(ACCESS_TOKEN_KEY, JSON.stringify(arrayTaskToAdd));
 };
 
-const deleteAccessToken = () => {
+export const saveTokenType = (tokenType) => {
+  localStorage.setItem(TOKEN_TYPE_KEY, JSON.stringify(tokenType));
+};
+
+export const deleteAccessToken = () => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
 };
 
-const getAccessToken = () => {
+export const deleteTokenType = () => {
+  localStorage.removeItem(TOKEN_TYPE_KEY);
+};
+
+export const getAccessToken = () => {
   if (localStorage.getItem(ACCESS_TOKEN_KEY) !== null)
-    return JSON.parse(localStorage.getItem(this.TASK_ARRAY_KEY));
+    return JSON.parse(localStorage.getItem(ACCESS_TOKEN_KEY));
+  else return "";
+};
+
+export const getTokenType = () => {
+  if (localStorage.getItem(TOKEN_TYPE_KEY) !== null)
+    return JSON.parse(localStorage.getItem(TOKEN_TYPE_KEY));
   else return "";
 };
