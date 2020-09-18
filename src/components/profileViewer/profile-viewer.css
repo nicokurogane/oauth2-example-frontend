@@ -1,0 +1,11 @@
+.profile-viewer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.row {
+  margin-top: 24px;
+}

@@ -1,4 +1,8 @@
 import axios from "axios";
+import {
+  getAccessToken as getAccessTokenFromLocalStorage,
+  getTokenType,
+} from "../utils/storage/storage";
 
 const axiosClient = axios.create({
   baseURL: "https://nestjs-oauth2-demo-v2.herokuapp.com/",
@@ -10,7 +14,17 @@ export const getAuthorize = async () => {
   return await axiosClient.get("azure/auth/authorize");
 };
 
-export const getAccessToken = async (code, state) => {
+export const getAccessToken = async (code, state, cancelToken = {}) => {
   const options = { params: { code, state } };
   return await axiosClient.get("azure/auth/token", options);
+};
+
+export const getUserProfile = async () => {
+  //const tokenType = getTokenType();
+  const accessToken = getAccessTokenFromLocalStorage();
+
+  const options = {
+    headers: { Authorization: `Bearer ${accessToken}` },
+  };
+  return await axiosClient.get("azure/users/me", options);
 };
