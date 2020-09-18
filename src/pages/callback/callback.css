@@ -1,0 +1,34 @@
+.callback-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-img {
+  width: 100px;
+  height: 100px;
+}
+
+.back-link {
+  text-decoration: none;
+  margin-top: 24px;
+  padding: 8px;
+  border: none;
+  background-color: #27597d;
+  color: #ffffff;
+  transition: 0.25s;
+}
+
+.back-link:hover {
+  background-color: #ffffff;
+  color: #27597d;
+  outline: solid 1px #27597d;
+}

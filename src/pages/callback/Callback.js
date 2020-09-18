@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { getAccessToken } from "../../api/apiClient";
 import { history } from "../app/App";
 import { saveAccessToken, saveTokenType } from "../../utils/storage/storage";
+import loadingImage from "../../assets/images/loading.gif";
+import errorImage from "../../assets/images/error.svg";
+import redirectImage from "../../assets/images/enter.svg";
+import "./callback.css";
 
 const Callback = () => {
   const [loading, setLoading] = useState(true);
   const [authSuccedded, setAuthSuccedded] = useState(false);
-  const [error, setError] = useState(false);
   let query = new URLSearchParams(useLocation().search);
 
   const getAccesTokenFromServer = () => {
-    const CancelToken = axios.CancelToken;
-    const source = CancelToken.source();
     const code = query.get("code");
     const state = query.get("state");
     getAccessToken(code, state)
       .then((response) => {
         const { access_token, token_type } = response.data;
-        //console.log(response.data);
         saveTokenType(token_type);
         saveAccessToken(access_token);
         setLoading(false);
@@ -27,8 +26,7 @@ const Callback = () => {
       })
       .catch((error) => {
         setLoading(false);
-        setError(true);
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -38,18 +36,43 @@ const Callback = () => {
 
   useEffect(() => {
     if (authSuccedded) {
-      history.push("/profile");
+      //para efectos demostrativos se puso la redireccion despues de 5 segundos:
+      setTimeout(() => {
+        history.push("/profile");
+      }, 5000);
     }
   }, [authSuccedded]);
 
   if (loading) {
-    return <span>Cargando...</span>;
-  } else if (!loading && error) {
-    return <span>Ocurrio un error con su autenticacion: </span>;
+    return (
+      <div className="callback-container">
+        <div className="content">
+          <img src={loadingImage} alt="loading" className="loading-img"></img>
+          <span>Cargando...</span>;
+        </div>
+      </div>
+    );
   } else if (!loading && authSuccedded) {
-    return <span>Redirigiendo: </span>;
+    return (
+      <div className="callback-container">
+        <div className="content">
+          <img src={redirectImage} alt="loading" className="loading-img"></img>
+          <span>Redirigiendo...</span>;
+        </div>
+      </div>
+    );
   } else {
-    return <span></span>;
+    return (
+      <div className="callback-container">
+        <div className="content">
+          <img src={errorImage} alt="loading" className="loading-img"></img>
+          <span>Ocurrio un error con su autenticacion </span>
+          <Link to="/" className="back-link">
+            Regresar
+          </Link>
+        </div>
+      </div>
+    );
   }
 };
 
