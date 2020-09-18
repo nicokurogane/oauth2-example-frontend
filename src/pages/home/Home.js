@@ -11,7 +11,7 @@ const Home = () => {
         window.location.href = data.url;
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -24,7 +24,7 @@ const Home = () => {
 
           <p>Para probar el flujo de autorización da click en el botón: </p>
           <button onClick={handleAuthorization} className="auth-button">
-            <img src={outlookLogo} className="auth-logo"></img>
+            <img src={outlookLogo} className="auth-logo" alt="outlook"></img>
             Ingresar con Outlook
           </button>
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { getAccessToken } from "../../api/apiClient";
 import { history } from "../app/App";
-import { saveAccessToken, saveTokenType } from "../../utils/storage/storage";
+import { saveAccessToken } from "../../utils/storage/storage";
 import loadingImage from "../../assets/images/loading.gif";
 import errorImage from "../../assets/images/error.svg";
 import redirectImage from "../../assets/images/enter.svg";
@@ -18,8 +18,7 @@ const Callback = () => {
     const state = query.get("state");
     getAccessToken(code, state)
       .then((response) => {
-        const { access_token, token_type } = response.data;
-        saveTokenType(token_type);
+        const { access_token } = response.data;
         saveAccessToken(access_token);
         setLoading(false);
         setAuthSuccedded(true);

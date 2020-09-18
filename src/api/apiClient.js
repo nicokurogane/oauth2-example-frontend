@@ -1,8 +1,5 @@
 import axios from "axios";
-import {
-  getAccessToken as getAccessTokenFromLocalStorage,
-  getTokenType,
-} from "../utils/storage/storage";
+import { getAccessToken as getAccessTokenFromLocalStorage } from "../utils/storage/storage";
 
 const axiosClient = axios.create({
   baseURL: "https://nestjs-oauth2-demo-v2.herokuapp.com/",
@@ -20,7 +17,6 @@ export const getAccessToken = async (code, state, cancelToken = {}) => {
 };
 
 export const getUserProfile = async () => {
-  //const tokenType = getTokenType();
   const accessToken = getAccessTokenFromLocalStorage();
 
   const options = {
