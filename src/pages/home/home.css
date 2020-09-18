@@ -1,0 +1,61 @@
+.home-container {
+  height: 100vh;
+}
+.header {
+  height: 80px;
+  background-color: #011625;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 24px;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+}
+
+.card {
+  padding: 32px;
+  width: 30%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card h2 {
+  margin: 0;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.auth-button {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: none;
+  background-color: #27597d;
+  color: #ffffff;
+  transition: 0.25s;
+}
+
+.auth-button:hover {
+  background-color: #ffffff;
+  color: #27597d;
+  outline: solid 1px #27597d;
+}
+
+.auth-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
